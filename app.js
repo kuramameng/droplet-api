@@ -6,6 +6,7 @@ var bodyParser = require('body-parser');
 var session = require('express-session');
 var uuid = require('uuid');
 var MongoStore = require('connect-mongo')(session);
+var cors = require('cors');
 process.env.SESSION_SECRET || require('dotenv').load();
 // require passport
 // require passport config file
@@ -24,6 +25,11 @@ var twilioNumber = process.env.TWILIO_NUMBER;
 var client = twilio(twilioSID, twilioToken);
 
 var app = express();
+
+app.use(cors({
+  origin: ['http://localhost:5000', 'http://berners-lee.github.io'],
+  credentials: true
+}));
 
 // uncomment after placing your favicon in /public
 //app.use(favicon(path.join(__dirname, 'public', 'favicon.ico')));
