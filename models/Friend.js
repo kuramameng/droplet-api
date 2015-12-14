@@ -6,7 +6,7 @@ var friendSchema = new mongoose.Schema({
   profile_ObjectId: {
     type: mongoose.Schema.Types.ObjectId,
     required: true,
-    unique: true
+    ref: 'Profile'
   },
   first_name: {
     type: String
@@ -14,13 +14,14 @@ var friendSchema = new mongoose.Schema({
   last_name: {
     type: String
   },
-  address: {
+  location: {
     type: String,
     required: true
   },
   email: {
     type: String,
-    required: true
+    required: true,
+    unique: true
   },
   phone: {
     type: String,
