@@ -19,7 +19,10 @@ module.exports = {
             var pProfile = new Promise(function(res, rej) {
                 Profile.create({
                     user_ObjectId : req.user._id,
-                    cart: []
+                    address : req.body.address,
+                    email : req.body.email,
+                    phone : req.body.phone,
+                    friend_list : []
                 }, function(err, profile) {
                     if(err) {
                         rej(err);
@@ -37,31 +40,41 @@ module.exports = {
             });
         }
     },
-    // addFriend : {
-    //     patch : function(req, res, next) {
-    //         Profile.find({user_ObjectId: req.user._id}).exec().then(function(profile){
-    //             if (!req.session.cart) req.session.cart = [];
-    //             req.session.cart.push(req.body.temp);
-    //             profile[0].cart.push(req.body.temp);
-    //             profile[0].save(function(err){
-    //                 if (err) return next(err);
-    //                 res.send('added');
-    //             });
-    //         });
-    //     }
-    // },
-    // deleteCart : {
-    //     patch : function(req, res, next) {
-    //         Profile.find({user_ObjectId: req.user._id}).exec().then(function(profile){
-    //             req.session.cart.splice(req.session.cart.indexOf(req.body.temp),1);
-    //             profile[0].cart.splice(profile[0].cart.indexOf(req.body.temp),1);
-    //             profile[0].save(function(err){
-    //                 if (err) return next(err);
-    //                 res.send('deleted');
-    //             });
-    //         });
-    //     }
-    // },
+    updateProfile : {
+        patch : function(req, res, next) {
+            Profile.find({user_ObjectId: req.user._id}).exec().then(function(profile){
+                profile[0].address = req.body.address;
+                profile[0].email = req.body.email;
+                profile[0].phone = req.body.phone;
+                profile[0].save(function(err){
+                    if (err) return next(err);
+                    res.send('Profile updated');
+                });
+            });
+        }
+    },
+    addFriend : {
+        patch : function(req, res, next) {
+            Profile.find({user_ObjectId: req.user._id}).exec().then(function(profile){
+                profile[0].friend_list.push(req.body.friend);
+                profile[0].save(function(err){
+                    if (err) return next(err);
+                    res.send('friend added');
+                });
+            });
+        }
+    },
+    deleteFriend : {
+        patch : function(req, res, next) {
+            Profile.find({user_ObjectId: req.user._id}).exec().then(function(profile){
+                profile[0].friend_list.splice(profile[0].friend_list.indexOf(req.body.friend),1);
+                profile[0].save(function(err){
+                    if (err) return next(err);
+                    res.send('deleted');
+                });
+            });
+        }
+    },
     destroy : {
         delete : function(req, res, next) {
             Profile.remove({user_ObjectId: req.user._id}, function(err, profile) {
