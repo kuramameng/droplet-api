@@ -16,6 +16,12 @@ var users = require('./routes/users');
 var profiles = require('./routes/profiles');
 var friends = require('./routes/friends');
 var messages = require('./routes/messages');
+// twilio
+var twilio = require('twilio');
+var twilioSID = process.env.TWILIO_SID;
+var twilioToken = process.env.TWILIO_TOKEN;
+var twilioNumber = process.env.TWILIO_NUMBER;
+var client = twilio(twilioSID, twilioToken);
 
 var app = express();
 
@@ -53,6 +59,17 @@ app.use('/profiles', profiles);
 app.use('/friends', friends);
 app.use('/messages', messages);
 
+// twilio test function
+app.get('/testtwilio', function(req, res){
+  client.sendMessage({
+    to: '+16176862263',
+    from: twilioNumber,
+    body: "Guess who I am? :)"
+  }, function(err, data){
+    if (err) console.log(err)
+      res(data);
+  });
+});
 
 // catch 404 and forward to error handler
 app.use(function(req, res, next) {
@@ -87,3 +104,5 @@ app.use(function(err, req, res, next) {
 
 
 module.exports = app;
+
+

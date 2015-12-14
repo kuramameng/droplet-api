@@ -29,7 +29,7 @@ var messageSchema = new mongoose.Schema({
     ref: 'Friend'
   },
   weather: {
-    type: String,
+    type: Array,
     required: true
   },
   message_body: {

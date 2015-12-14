@@ -22,6 +22,8 @@ module.exports = {
     },
     create : {
         post : function(req, res, next) {
+            // yahoo weather
+            // <script src="https://query.yahooapis.com/v1/public/yql?q=select item from weather.forecast where woeid in (select woeid from geo.places(1) where text='boston, ma')&format=json"></script>
             var currentProfileId;
             var friendId;
             Profile.find({user_ObjectId: req.user._id}).exec().then(function(profile) {
