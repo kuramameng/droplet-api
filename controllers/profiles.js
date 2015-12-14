@@ -20,8 +20,11 @@ module.exports = {
                 Profile.create({
                     user_ObjectId : req.user._id,
                     address : req.body.address,
+                    first_name : req.body.first_name,
+                    last_name : req.body.last_name,
                     email : req.body.email,
                     phone : req.body.phone,
+                    image : req.body.image,
                     friend_list : []
                 }, function(err, profile) {
                     if(err) {
