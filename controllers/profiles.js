@@ -46,6 +46,9 @@ module.exports = {
     updateProfile : {
         patch : function(req, res, next) {
             Profile.find({user_ObjectId: req.user._id}).exec().then(function(profile){
+                profile[0].username = req.body.username;
+                profile[0].first_name = req.body.first_name;
+                profile[0].last_name = req.body.last_name;
                 profile[0].address = req.body.address;
                 profile[0].email = req.body.email;
                 profile[0].phone = req.body.phone;

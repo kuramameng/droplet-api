@@ -8,6 +8,9 @@ var profileSchema = new mongoose.Schema({
     required: true,
     unique: true
   },
+  username: {
+    type: String
+  },
   first_name: {
     type: String
   },
@@ -29,9 +32,6 @@ var profileSchema = new mongoose.Schema({
   },
   image: {
     type: String
-  },
-  friend_list: {
-    type: [mongoose.Schema.Types.ObjectId]
   }
 });
 
