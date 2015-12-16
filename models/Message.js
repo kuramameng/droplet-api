@@ -28,6 +28,10 @@ var messageSchema = new mongoose.Schema({
     required: true,
     ref: 'Friend'
   },
+  friend_firstname: {
+    type: String,
+    required: true
+  },
   weather: {
     type: Array,
     required: true
