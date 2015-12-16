@@ -24,20 +24,21 @@ module.exports = {
         post : function(req, res, next) {
             // yahoo weather
             // <script src="https://query.yahooapis.com/v1/public/yql?q=select item from weather.forecast where woeid in (select woeid from geo.places(1) where text='boston, ma')&format=json"></script>
-            var currentProfileId;
-            var friendId;
+            var currentProfileId, friendId, friendFirstName;
             Profile.find({user_ObjectId: req.user._id}).exec().then(function(profile) {
                 currentProfileId = profile[0]._id;
             }).then(function(){
                 return Friend.find({profile_ObjectId: currentProfileId}).exec()
             }).then(function(friend){
                     friendId = friend[0]._id;
+                    friendFirstName = friend[0].first_name;
             }).then(function(){
                 console.log(currentProfileId, friendId);
                 var pMessage = new Promise(function(res, rej) {
                     Message.create({
                         profile_ObjectId : currentProfileId,
                         friend_ObjectId : friendId,
+                        friend_firstname :  friendFirstName,
                         weather : req.body.weather,
                         message_body : req.body.message_body
                     }, function(err, message) {
@@ -59,7 +60,7 @@ module.exports = {
     },
     destroy : {
         delete : function(req, res, next) {
-            Message.remove({friend_ObjectId: req.body._id}, function(err, message) {
+            Message.remove({_id: req.body._id}, function(err, message) {
                 if (err) return next(err);
                 res.send(message); // see results
             });
