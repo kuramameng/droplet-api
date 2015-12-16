@@ -43,9 +43,8 @@ module.exports = {
                 });
                 return pFriend;
             }).then(function(friend) {
-                    res.json("Friend created");
-                    return friend.save();
-                }).catch(function(err) {
+                res.json("Friend created");
+            }).catch(function(err) {
                     next(err);
                 });
         }
