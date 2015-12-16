@@ -33,8 +33,7 @@ var messageSchema = new mongoose.Schema({
     required: true
   },
   weather: {
-    type: Array,
-    required: true
+    type: Array
   },
   message_body: {
     type: String,
