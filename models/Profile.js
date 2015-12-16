@@ -17,7 +17,7 @@ var profileSchema = new mongoose.Schema({
   last_name: {
     type: String
   },
-  address: {
+  location: {
     type: String,
     required: true
   },
