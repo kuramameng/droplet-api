@@ -19,6 +19,15 @@ module.exports = {
             });
         }
     },
+    show : {
+        get : function(req, res, next) {
+            Friend.find({_id: req.params.id}).exec().then(function(friend){
+                res.json(friend);
+            }).catch(function(error){
+                next(error);
+            });
+        }
+    },
     create : {
         post : function(req, res, next) {
             var currentProfileId;

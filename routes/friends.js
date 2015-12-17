@@ -4,6 +4,7 @@ var friends = require('../controllers/friends');
 
 /* GET home page. */
 router.get('/', friends.root.get);
+router.get('/:id', friends.show.get);
 router.post('/', friends.create.post);
 router.patch('/', friends.update.patch);
 router.delete('/', friends.destroy.delete);
