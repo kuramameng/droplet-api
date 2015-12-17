@@ -21,7 +21,7 @@ var messages = require('./routes/messages');
 var app = express();
 
 app.use(cors({
-  origin: ['http://localhost:5000', 'http://kuramameng.github.io/droplet-frontend'],
+  origin: ['http://localhost:5000', 'http://kuramameng.github.io'],
   credentials: true
 }));
 
