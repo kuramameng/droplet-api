@@ -8,6 +8,6 @@ mongoose.model('Profile', require('./Profile'));
 mongoose.model('Friend', require('./Friend'));
 mongoose.model('Message', require('./Message'));
 
-mongoose.connect("mongodb://localhost/droplet-db");
+mongoose.connect(process.env.MONGOLAB_URI);
 
 module.exports = mongoose;

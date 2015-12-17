@@ -21,7 +21,7 @@ var messages = require('./routes/messages');
 var app = express();
 
 app.use(cors({
-  origin: ['http://localhost:5000', 'http://berners-lee.github.io'],
+  origin: ['http://localhost:5000', 'http://kuramameng.github.io/droplet-frontend'],
   credentials: true
 }));
 
@@ -35,7 +35,7 @@ app.use(session({
 	resave : false,
 	saveUninitialized : false,
 	store : new MongoStore({
-		url : "mongodb://localhost/droplet-db"
+		url : process.env.MONGOLAB_URI
 	}),
 	cookie : {
 		maxAge : 1800000 // 30 minutes
