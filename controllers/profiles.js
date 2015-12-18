@@ -22,6 +22,7 @@ module.exports = {
                     location : req.body.location,
                     first_name : req.body.first_name,
                     last_name : req.body.last_name,
+                    username : req.body.username,
                     email : req.body.email,
                     phone : req.body.phone,
                     image : req.body.image
