@@ -2,6 +2,7 @@
 
 var passport = require('passport');
 var User = require('../models').model('User');
+var Profile = require('../models').model('Profile');
 
 module.exports = {
     deny : function(req, res) {
@@ -71,8 +72,8 @@ module.exports = {
             });
             pUser.then(function(user) {
                 return user.setPassword(req.body.password);
-            }).then(function() {
-                res.sendStatus(200);
+            }).then(function(user) {
+                res.json(user);
             }).catch(function(err) {
                 next(err);
             });
