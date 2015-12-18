@@ -23,6 +23,8 @@ module.exports = {
                 }).catch(function(error) {
                     next(error);
                 });
+            }).catch(function(err) {
+                next(err);
             });
         }
     },
