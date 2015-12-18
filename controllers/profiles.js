@@ -19,13 +19,12 @@ module.exports = {
             var pProfile = new Promise(function(res, rej) {
                 Profile.create({
                     user_ObjectId : req.user._id,
-                    address : req.body.address,
+                    location : req.body.location,
                     first_name : req.body.first_name,
                     last_name : req.body.last_name,
                     email : req.body.email,
                     phone : req.body.phone,
-                    image : req.body.image,
-                    friend_list : []
+                    image : req.body.image
                 }, function(err, profile) {
                     if(err) {
                         rej(err);
@@ -35,9 +34,7 @@ module.exports = {
                 });
             });
             pProfile.then(function() {
-                res.sendStatus(200);
                 res.send('Created');
-                return this.save();
             }).catch(function(err) {
                 next(err);
             });
